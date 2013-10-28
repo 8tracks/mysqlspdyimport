@@ -96,7 +96,7 @@ func init() {
 	flag.StringVar(&mysqlConf.host, "h", "localhost", "Database host")
 	flag.StringVar(&mysqlConf.port, "P", "3306", "Database port")
 	flag.StringVar(&mysqlConf.database, "d", "", "Database name")
-	flag.IntVar(&numGoFuncs, "c", 3, "Number of go routines to execute queries.")
+	flag.IntVar(&numGoFuncs, "c", 3, "Number of goroutines to execute queries.")
 }
 
 func main() {
