@@ -9,6 +9,12 @@ Parallel-ized, concurrent-ized, STDIN mysql import tool. Just pipe `INSERT` stat
 3. Speed up imports by using concurrency and parallelism of go.
 
 
+## Assumptions
+
+* The insert queries do not conflict with each other. If you're importing into a table that requires unique records but your queries are not unique, this *could* cause problems.
+* Insert order does not matter.
+
+
 ## Install
 
 You'll need to setup go on your machine. Checkout http://golang.org/doc/install.
@@ -36,10 +42,4 @@ Increase the number of goroutines to 100.
 
 The data piped in can be any query, but `mysqlspdyimport` will only run queries that start with `INSERT`.
 
-
-## Assumptions
-
-* The insert queries do not conflict with each other. If you're importing into a table that requires unique records but your queries are not unique, this *could* cause problems.
-
-* Insert order does not matter.
 
