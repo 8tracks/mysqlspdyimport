@@ -13,7 +13,7 @@ import (
 	"sync"
 
 	"database/sql"
-	_ "github.com/8tracks.com/mysqlspdyimport/vendor/go-sql-driver/mysql"
+	_ "github.com/8tracks/mysqlspdyimport/vendor/go-sql-driver/mysql"
 )
 
 const NotInsertStatement = "Not an insert statement"
