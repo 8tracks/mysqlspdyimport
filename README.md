@@ -1,45 +1,57 @@
 # mysqlspdyimport
 
-Parallel-ized, concurrent-ized, STDIN mysql import tool. Just pipe `INSERT` statements in and watch your database fill up with your favorite mysql query tool.
+Parallel-ized, concurrent-ized, STDIN mysql import tool. Just pipe `INSERT`
+statements in and watch your database fill up with your favorite mysql query
+tool.
 
 ## Primary Motivators
 
-1. At 8tracks we use different databases on EC2 (mysql and postgres). We dump database/tables with SQL statements to transfer data between databases.
-2. Continue processing a file even if there are bad queries like unescaped quotes or backslashes.
+1. At 8tracks we use different databases on EC2 (mysql and postgres). We dump
+   database/tables with SQL statements to transfer data between databases.
+2. Continue processing a file even if there are bad queries like unescaped
+   quotes or backslashes.
 3. Speed up imports by using concurrency and parallelism of go.
 
 
 ## Assumptions
 
-* The insert queries do not conflict with each other. If you're importing into a table that requires unique records but your queries are not unique, this *could* cause problems.
+* The insert queries do not conflict with each other. If you're importing into
+  a table that requires unique records but your queries are not unique, this
+  *could* cause problems.
 * Insert order does not matter.
 
 
 ## Install
 
-You'll need to setup go on your machine. Checkout http://golang.org/doc/install.
+You'll need to setup go on your machine. Checkout
+http://golang.org/doc/install.
 
-Then you can checkout the repo and build/install it. The repository does use submodules to keep things in check until a go package manager is created. Make sure you add the `--recursive` option to `git clone` like below.
+Then you can checkout the repo and build/install it. The repository does use
+submodules to keep things in check until a go package manager is created. Make
+sure you add the `--recursive` option to `git clone` like below.
 
-    cd $GOPROJ/src
-    git clone --recursive https://github.com/8tracks/mysqlspdyimport.git github.com/8tracks/mysqlspdyimport
-    cd github.com/8tracks/mysqlspdyimport
-    go install
+	cd $GOPROJ/src git clone --recursive
+	https://github.com/8tracks/mysqlspdyimport.git
+	github.com/8tracks/mysqlspdyimport cd github.com/8tracks/mysqlspdyimport go
+	install
 
 
 
 ## Basic Usage
 
-Use this tool like you would if you were to pipe a bunch of SQL commands into the `mysql` commandline tool.
+Use this tool like you would if you were to pipe a bunch of SQL commands into
+the `mysql` commandline tool.
 
- By default, the following commands will use 3 goroutines and import data into the localhost mysql instance for the given database.
+ By default, the following commands will use 3 goroutines and import data into
+ the localhost mysql instance for the given database.
 
-    cat dump.sql | mysqlspdyimport -d DATABASE
+	cat dump.sql | mysqlspdyimport -d DATABASE
 
 Increase the number of goroutines to 100.
 
-    cat dump.sql | mysqlspdyimport -d DATABASE -c 100
+	cat dump.sql | mysqlspdyimport -d DATABASE -c 100
 
-The data piped in can be any query, but `mysqlspdyimport` will only run queries that start with `INSERT`.
+The data piped in can be any query, but `mysqlspdyimport` will only run queries
+that start with `INSERT`.
 
 
