@@ -21,7 +21,7 @@ tool.
 * Insert order does not matter.
 
 
-## Install
+## Install (git)
 
 You'll need to setup go on your machine. Checkout
 http://golang.org/doc/install.
@@ -30,10 +30,9 @@ Then you can checkout the repo and build/install it. The repository does use
 submodules to keep things in check until a go package manager is created. Make
 sure you add the `--recursive` option to `git clone` like below.
 
-	cd $GOPROJ/src git clone --recursive
-	https://github.com/8tracks/mysqlspdyimport.git
-	github.com/8tracks/mysqlspdyimport cd github.com/8tracks/mysqlspdyimport go
-	install
+	cd $GOPROJ/src git clone --recursive https://github.com/8tracks/mysqlspdyimport.git github.com/8tracks/mysqlspdyimport
+	cd github.com/8tracks/mysqlspdyimport
+	go install
 
 
 
